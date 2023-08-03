@@ -10,22 +10,36 @@
 /*Global styles  */
 :root{
     /* colors */
-    --Dark-Blue:hsl(209, 23%, 22%);
-   --Very-Dark: hsl(207, 26%, 17%);
-   --Very-Dark: hsl(200, 15%, 8%);
-   --Dark-Gray:hsl(0, 0%, 52%);
-   --Very-Light-Gray:hsl(0, 0%, 98%);
+    --Dark-Blue-Mode-Elements:hsl(209, 23%, 22%);
+   --Very-Dark-blue-Background: hsl(207, 26%, 17%);
+   --Very-Dark-Light-Mode-Text: hsl(200, 15%, 8%);
+   --Dark-Gray-Light-Mode-Input:hsl(0, 0%, 52%);
+   --Very-Light-Gray-Mode-Background:hsl(0, 0%, 98%);
    --White:hsl(0, 0%, 100%);
 
    /* Typography */
    --size:14px;
    /* fonts */
-   --lightBold:300,
-   --mediumBold:600,
-   --veryBold:800,
+   --lightBold:300;
+   --mediumBold:600;
+   --veryBold:800;
 }
 
 /* body */
 body{
     font-family:'Nunito Sans', sans-serif;
+    background-color: var(--Very-Dark-blue-Background);
+    color:var(--White);
+}
+
+/* Header */
+nav{
+    display: flex;
+    justify-content: space-between ;
+    font-weight: var(--veryBold);
+    font-size: 16px;
+    height:5vh;
+    align-items: center;
+    padding:0 25px;
+    background-color: var( --Dark-Blue-Mode-Elements);
 }
