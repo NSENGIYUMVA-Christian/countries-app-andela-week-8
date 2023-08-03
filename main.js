@@ -40,25 +40,29 @@ async function getAllCountries() {
     // iterate through all countries and displaying it to he homepage
     for (let i = 0; i < allCountries.length; i++) {
       let singleCountryContainer = document.createElement("div");
+      let imgContainer = document.createElement("div");
+      let otherInfoContainer = document.createElement("div");
 
       // flag image
       let flagImg = document.createElement("img");
       flagImg.src = allCountries[i].flags.png;
-      singleCountryContainer.appendChild(flagImg);
+      imgContainer.appendChild(flagImg);
 
       // country name
       let nameH2 = document.createElement("h2");
       let nameText = document.createTextNode(allCountries[i].name.common);
       nameH2.appendChild(nameText);
-      singleCountryContainer.appendChild(nameH2);
+      nameH2.style.marginBottom = "10px";
+      otherInfoContainer.appendChild(nameH2);
 
       // population
       let populationP = document.createElement("p");
       let populationText = document.createTextNode(
-        `Population: ${allCountries[i].population}`
+        `Population: ${Number(allCountries[i].population).toLocaleString()}`
       );
       populationP.appendChild(populationText);
-      singleCountryContainer.appendChild(populationP);
+      populationP.style.marginBottom = "4px";
+      otherInfoContainer.appendChild(populationP);
 
       //region
       let regionP = document.createElement("p");
@@ -66,16 +70,29 @@ async function getAllCountries() {
         `Region: ${allCountries[i].region}`
       );
       regionP.appendChild(regionText);
-      singleCountryContainer.appendChild(regionP);
+      regionP.style.marginBottom = "4px";
+      otherInfoContainer.appendChild(regionP);
+
       //capital
       let capitalP = document.createElement("p");
       let capitalText = document.createTextNode(
-        `Capital : ${allCountries[i].capital[0]}`
+        `Capital : ${allCountries[i]?.capital[0]}`
       );
       capitalP.appendChild(capitalText);
-      singleCountryContainer.appendChild(capitalP);
-      //add styles
+      otherInfoContainer.appendChild(capitalP);
+      //add styles to singleCountryContainer
       singleCountryContainer.classList.add("single-country-styles");
+
+      //adding styles to imgContainer
+      imgContainer.classList.add("img-Container-Styles");
+      //adding styles to otherInfoContainer
+      otherInfoContainer.classList.add("other-InfoContainer-Styles");
+
+      // appending img container
+      singleCountryContainer.appendChild(imgContainer);
+      //appending other info container
+      singleCountryContainer.appendChild(otherInfoContainer);
+      //appending single country container
       allCountriesContainer.appendChild(singleCountryContainer);
     }
 
