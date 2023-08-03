@@ -1,9 +1,13 @@
-let defaultCountryName = "rwanda";
-// let country = document.querySelector(".country-name");
-// let population = document.querySelector(".population");
-// let region = document.querySelector(".region");
-// let flag = document.querySelector(".flag");
 let allCountriesContainer = document.querySelector(".all-countries-container");
+let searchedItem = document.querySelector(".searchedItem");
+let searchBtn = document.querySelector("#searchBtn");
+console.log("search item", searchedItem);
+console.log("search btn", searchBtn);
+// search by country name
+searchBtn.addEventListener("click", function () {
+  let searchedName = searchedItem.value;
+  getCountryByName(searchedName);
+});
 
 async function getCountryByName(countryName) {
   try {
@@ -20,10 +24,16 @@ async function getCountryByName(countryName) {
     const flagAPI = response[0].flag.png;
     const populationAPI = response[0].population;
     const regionAPI = response[0].region;
+    const subRegionApi = response[0].subregion;
     const capitalAPI = response[0].capital[0];
+    const nativeName = response[0].name.nativeName.eng.official;
+    const topLevelDomain = response[0].tld[0];
+    const currency = response[0].currencies;
+    const languageAPI = response[0].languages;
+    const borderCountries = response[0].borders;
 
     console.log(response);
-    console.log("bro");
+    console.log("succeed");
   } catch (error) {
     console.log(error);
   }
@@ -75,9 +85,15 @@ async function getAllCountries() {
 
       //capital
       let capitalP = document.createElement("p");
-      let capitalText = document.createTextNode(
-        `Capital : ${allCountries[i]?.capital[0]}`
-      );
+      let capitalText;
+      if (allCountries[i]?.capital) {
+        capitalText = document.createTextNode(
+          `Capital: ${allCountries[i].capital[0]}`
+        );
+      } else {
+        capitalText = document.createTextNode("Capital: N/A");
+      }
+
       capitalP.appendChild(capitalText);
       otherInfoContainer.appendChild(capitalP);
       //add styles to singleCountryContainer
