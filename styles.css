@@ -32,7 +32,9 @@ body{
     color:var(--White);
     height:100vh
 }
-
+img{
+    width:100%
+}
 /* Header */
 nav{
     display: flex;
@@ -86,4 +88,19 @@ padding:8px;
     border-radius: 10px;
     border: 2px solid var(--Dark-Blue-Mode-Elements);
     
+}
+
+/* all-countries-container */
+.all-countries-container{
+    margin-top: 35px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+/* single-country-container */
+.single-country-styles{
+    /* border: 1px solid red; */
+    width:300px;
+    background-color: var( --Dark-Blue-Mode-Elements); 
+    margin-bottom: 30px ;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.5);
 }
