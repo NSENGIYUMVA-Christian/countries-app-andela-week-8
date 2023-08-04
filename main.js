@@ -28,9 +28,9 @@ async function getCountryByName(countryName) {
     const capitalAPI = response[0].capital[0];
     const nativeName = response[0].name.nativeName.eng.official;
     const topLevelDomain = response[0].tld[0];
-    const currency = response[0].currencies;
+    const currencies = response[0].currencies;
     const languageAPI = response[0].languages;
-    const borderCountries = response[0].borders;
+    const borderCountriesApi = response[0].borders;
     console.log(`
     name: ${countryNmAPI}
       flag: ${flagAPI},
@@ -40,9 +40,9 @@ async function getCountryByName(countryName) {
       capital: ${capitalAPI},
       native: ${nativeName},
       topLevel: ${topLevelDomain},
-      currency: ${currency},
+      currency: ${currencies},
       language: ${languageAPI},
-      borders: ${borderCountries}`);
+      borders: ${borderCountriesApi}`);
 
     console.log(response);
     console.log("succeed");
@@ -53,17 +53,32 @@ async function getCountryByName(countryName) {
     }
     // create a new blocks for single country
     let singleCountrySearchContainer = document.createElement("section");
+    //flag container
+    let flagContainer = document.createElement("div");
     // flag image
     let flagImg = document.createElement("img");
     flagImg.src = flagAPI;
-    singleCountrySearchContainer.appendChild(flagImg);
+    flagContainer.appendChild(flagImg);
+    singleCountrySearchContainer.appendChild(flagContainer);
 
+    // moreInfoContainer
+    let moreInfoContainer = document.createElement("div");
+
+    ////////////////////////////////////////////////////// moreInfoContainer part 1////////////////////////////////////////////
+    let moreInfoContainerPart1 = document.createElement("div");
     // country name
     let nameH2 = document.createElement("h2");
     let nameText = document.createTextNode(countryNmAPI);
     nameH2.appendChild(nameText);
     nameH2.style.marginBottom = "10px";
-    singleCountrySearchContainer.appendChild(nameH2);
+    moreInfoContainerPart1.appendChild(nameH2);
+    // native name
+    let naviteName = document.createElement("p");
+    let nativeText = document.createTextNode(`Native Name ${nativeName}`);
+    naviteName.appendChild(nativeText);
+    naviteName.style.marginBottom = "10px";
+    moreInfoContainerPart1.appendChild(naviteName);
+
     // population
     let populationP = document.createElement("p");
     let populationText = document.createTextNode(
@@ -71,27 +86,81 @@ async function getCountryByName(countryName) {
     );
     populationP.appendChild(populationText);
     populationP.style.marginBottom = "4px";
-    singleCountrySearchContainer.appendChild(populationP);
+    moreInfoContainerPart1.appendChild(populationP);
 
     //region
     let regionP = document.createElement("p");
     let regionText = document.createTextNode(`Region: ${regionAPI}`);
     regionP.appendChild(regionText);
     regionP.style.marginBottom = "4px";
-    singleCountrySearchContainer.appendChild(regionP);
+    moreInfoContainerPart1.appendChild(regionP);
+    // sub-region
+    let subRegionP = document.createElement("p");
+    let subRegionText = document.createTextNode(`Sub Region: ${subRegionApi}`);
+    subRegionP.appendChild(subRegionText);
+    subRegionP.style.marginBottom = "4px";
+    moreInfoContainerPart1.appendChild(subRegionP);
 
     //capital
     let capitalP = document.createElement("p");
+    capitalP.style.marginBottom = "4px";
     let capitalText = document.createTextNode(`Capital: ${capitalAPI}`);
     capitalP.appendChild(capitalText);
-    singleCountrySearchContainer.appendChild(capitalP);
+
+    moreInfoContainerPart1.appendChild(capitalP);
+    moreInfoContainer.appendChild(moreInfoContainerPart1);
+
+    ////////////////////////////////////////////////////// moreInfoContainer part 2////////////////////////////////////////////
+    let moreInfoContainerPart2 = document.createElement("div");
+    //topLevelDomain
+    let topLevelDomainP = document.createElement("p");
+    topLevelDomainP.style.marginBottom = "4px";
+    let topLevelDomainText = document.createTextNode(
+      `topLevelDomain: ${topLevelDomain}`
+    );
+    topLevelDomainP.appendChild(topLevelDomainText);
+    moreInfoContainerPart2.appendChild(topLevelDomainP);
+
+    //currencies
+    let currenciesP = document.createElement("p");
+    capitalP.style.marginBottom = "4px";
+    let currenciesText = document.createTextNode(`currencies: ${currencies}`);
+    currenciesP.appendChild(currenciesText);
+    moreInfoContainerPart2.appendChild(currenciesP);
+
+    //languages
+    let languagesP = document.createElement("p");
+    languagesP.style.marginBottom = "4px";
+    let languagesText = document.createTextNode(`languages: ${languageAPI}`);
+    languagesP.appendChild(languagesText);
+    moreInfoContainerPart2.appendChild(languagesP);
+    moreInfoContainer.appendChild(moreInfoContainerPart2);
+    ////////////////////////////////////////////////////// moreInfoContainer part 2 b ////////////////////////////////////////////
+    let moreInfoContainerPart2b = document.createElement("div");
+    moreInfoContainerPart2b.style.margin = "14px";
+    //borderCountries
+    let borderCountriesP = document.createElement("p");
+    let borderCountriesText = document.createTextNode(
+      `borderCountries: ${borderCountriesApi}`
+    );
+    borderCountriesP.appendChild(borderCountriesText);
+    moreInfoContainerPart2b.appendChild(borderCountriesP);
+    moreInfoContainer.appendChild(moreInfoContainerPart2b);
+    ///////////////////////////////////////////// end of information on passing info on single country page///////////////
+    //adding class name of moreInfoContainer
+    moreInfoContainer.classList.add("more-Info-Container");
+
+    // append moreInfoContainer to singleCountrySearchContainer
+    singleCountrySearchContainer.appendChild(moreInfoContainer);
+
+    //add styles to singleCountrySearchContainer
+    singleCountrySearchContainer.classList.add("search-country-block");
     // appending singleCountrySearchContainer to  allCountriesContainer
     allCountriesContainer.appendChild(singleCountrySearchContainer);
   } catch (error) {
     console.log(error);
   }
 }
-//getCountryByName(defaultCountryName);
 
 // get all countries
 async function getAllCountries() {

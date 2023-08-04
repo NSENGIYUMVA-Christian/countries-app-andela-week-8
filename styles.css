@@ -50,14 +50,11 @@ nav{
 
 /* main */
 main{
-    margin:35px 35px;
-    /* border:1px solid red; */
-    
+    margin:35px 35px; 
 }
 
-/* search bar and filter */
+
 .search-filter-container{
-    /* border:1px solid green; */
     display:flex;
     justify-content: space-between;
     
@@ -116,6 +113,34 @@ padding:8px;
     padding: 30px 20px;
 }
 /* search country block */
+.search-country-block{
+    border:2px solid yellow;
+    display:flex;
+    flex-wrap: wrap;
+    gap:20px;
+    padding:10px
+}
+.search-country-block img{
+    width:400px
+} 
+
+/* searched country information */
+.more-Info-Container{
+display:grid;
+grid-template-columns: 1fr 1fr;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
