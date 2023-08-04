@@ -21,7 +21,7 @@ async function getCountryByName(countryName) {
     let response = await data.json();
     // assigning html values to their corresponding values
     const countryNmAPI = response[0].name.common;
-    const flagAPI = response[0].flag.png;
+    const flagAPI = response[0].flags.png;
     const populationAPI = response[0].population;
     const regionAPI = response[0].region;
     const subRegionApi = response[0].subregion;
@@ -31,9 +31,62 @@ async function getCountryByName(countryName) {
     const currency = response[0].currencies;
     const languageAPI = response[0].languages;
     const borderCountries = response[0].borders;
+    console.log(`
+    name: ${countryNmAPI}
+      flag: ${flagAPI},
+      population: ${populationAPI},
+      region: ${regionAPI},
+      subRegion: ${subRegionApi},
+      capital: ${capitalAPI},
+      native: ${nativeName},
+      topLevel: ${topLevelDomain},
+      currency: ${currency},
+      language: ${languageAPI},
+      borders: ${borderCountries}`);
 
     console.log(response);
     console.log("succeed");
+
+    // delete all contents for all countries
+    while (allCountriesContainer.firstChild) {
+      allCountriesContainer.removeChild(allCountriesContainer.firstChild);
+    }
+    // create a new blocks for single country
+    let singleCountrySearchContainer = document.createElement("section");
+    // flag image
+    let flagImg = document.createElement("img");
+    flagImg.src = flagAPI;
+    singleCountrySearchContainer.appendChild(flagImg);
+
+    // country name
+    let nameH2 = document.createElement("h2");
+    let nameText = document.createTextNode(countryNmAPI);
+    nameH2.appendChild(nameText);
+    nameH2.style.marginBottom = "10px";
+    singleCountrySearchContainer.appendChild(nameH2);
+    // population
+    let populationP = document.createElement("p");
+    let populationText = document.createTextNode(
+      `Population: ${Number(populationAPI).toLocaleString()}`
+    );
+    populationP.appendChild(populationText);
+    populationP.style.marginBottom = "4px";
+    singleCountrySearchContainer.appendChild(populationP);
+
+    //region
+    let regionP = document.createElement("p");
+    let regionText = document.createTextNode(`Region: ${regionAPI}`);
+    regionP.appendChild(regionText);
+    regionP.style.marginBottom = "4px";
+    singleCountrySearchContainer.appendChild(regionP);
+
+    //capital
+    let capitalP = document.createElement("p");
+    let capitalText = document.createTextNode(`Capital: ${capitalAPI}`);
+    capitalP.appendChild(capitalText);
+    singleCountrySearchContainer.appendChild(capitalP);
+    // appending singleCountrySearchContainer to  allCountriesContainer
+    allCountriesContainer.appendChild(singleCountrySearchContainer);
   } catch (error) {
     console.log(error);
   }

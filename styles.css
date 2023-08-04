@@ -88,14 +88,17 @@ padding:8px;
 .filter-container{
     border-radius: 10px;
     border: 2px solid var(--Dark-Blue-Mode-Elements);
-    
+    background-color: var( --Dark-Blue-Mode-Elements);
 }
 
 /* all-countries-container */
 .all-countries-container{
     margin-top: 35px;
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display:flex;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+    flex-wrap: wrap;
+    gap:20px;
+    justify-content: center;
 }
 /* single-country-container */
 .single-country-styles{
@@ -111,4 +114,16 @@ padding:8px;
 }
 .other-InfoContainer-Styles{
     padding: 30px 20px;
+}
+/* search country block */
+
+
+
+/* RESPONSIVENESS ON MOBILE */
+@media screen and  (max-width: 375px)  {
+/* search bar and filter */
+.search-filter-container{
+    flex-direction: column;
+    gap:15px
+}
 }
