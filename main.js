@@ -1,8 +1,22 @@
 let allCountriesContainer = document.querySelector(".all-countries-container");
 let searchedItem = document.querySelector(".searchedItem");
 let searchBtn = document.querySelector("#searchBtn");
+let searchByRegionSelect = document.querySelector("#regions");
+console.log("select", searchByRegionSelect);
 console.log("search item", searchedItem);
 console.log("search btn", searchBtn);
+
+// search by region
+searchByRegionSelect.addEventListener("input", function (e) {
+  console.log("filtered select");
+  const selectedIndex = searchByRegionSelect.selectedIndex;
+  const selectedItemName =
+    searchByRegionSelect.options[selectedIndex].textContent;
+  // invoking getCountriesByRegion
+  getCountriesByRegion(selectedItemName);
+  // console.log(selectedItemName);
+});
+
 // search by country name
 searchBtn.addEventListener("click", function () {
   let searchedName = searchedItem.value;
@@ -64,6 +78,7 @@ async function getCountryByName(countryName) {
     backBtnContainer.style.height = "25px";
     backBtnContainer.style.padding = "5px";
     backBtnContainer.style.marginBottom = "2px";
+    backBtnContainer.style.cursor = "pointer";
     // adding event listener to backBtn
     backBtnContainer.addEventListener("click", function () {
       // delete all contents for a single country canva
@@ -278,6 +293,24 @@ async function getAllCountries() {
     console.log(allCountries);
   } catch (error) {
     console.log(error);
+  }
+}
+
+//////////////////////////////////// filtering by region////////////////////////////////////////
+async function getCountriesByRegion(regionName) {
+  try {
+    const data =
+      await fetch(`https://restcountries.com/v3.1/region/${regionName}
+    `);
+    let result = await data.json();
+    console.log("result", result);
+    console.log("by region succeeded");
+    // delete all contents for all countries
+    // while (allCountriesContainer.firstChild) {
+    //   allCountriesContainer.removeChild(allCountriesContainer.firstChild);
+    // }
+  } catch (error) {
+    console.log("error occurred on fetching by region");
   }
 }
 
