@@ -2,6 +2,28 @@ let allCountriesContainer = document.querySelector(".all-countries-container");
 let searchedItem = document.querySelector(".searchedItem");
 let searchBtn = document.querySelector("#searchBtn");
 let searchByRegionSelect = document.querySelector("#regions");
+let toggleColors = document.querySelector(".toggle-colors");
+let changeColorMode = true;
+// Get the root element
+const root = document.documentElement;
+// add curser pointer
+toggleColors.style.cursor = "pointer";
+// toggle color modes
+toggleColors.addEventListener("click", function () {
+  if (changeColorMode) {
+    // Modify the value of the CSS variable
+    root.style.setProperty("--Dark-Blue-Mode-Elements", "hsl(0, 0%, 98%)");
+    root.style.setProperty("--White", "hsl(200, 15%, 8%)");
+    root.style.setProperty("--Very-Dark-blue-Background", "hsl(0, 0%, 98%)");
+    changeColorMode = false;
+  } else {
+    root.style.setProperty("--Dark-Blue-Mode-Elements", "hsl(209, 23%, 22%)");
+    root.style.setProperty("--White", "hsl(0, 0%, 100%)");
+    root.style.setProperty("--Very-Dark-blue-Background", "hsl(207, 26%, 17%)");
+    changeColorMode = true;
+  }
+});
+console.log(toggleColors);
 
 // search by region
 searchByRegionSelect.addEventListener("input", function (e) {
@@ -66,7 +88,7 @@ async function getCountryByName(countryName) {
     // creating back btn
     let backBtnContainer = document.createElement("div");
     // styles for back btn container
-    backBtnContainer.style.backgroundColor = "hsl(209, 23%, 22%)";
+    backBtnContainer.style.backgroundColor = "var( --Dark-Blue-Mode-Elements)";
     backBtnContainer.style.display = "flex";
     backBtnContainer.style.flexWrap = "wrap";
     backBtnContainer.style.width = "100px";
@@ -85,7 +107,6 @@ async function getCountryByName(countryName) {
       }
       // re run get all countries
       getAllCountries();
-      console.log("back btn clicked");
     });
     let backIcon = document.createElement("i");
     backIcon.className = "fa-solid fa-arrow-left";
@@ -234,17 +255,17 @@ async function getAllCountries() {
         }
         // display selected country
         // assigning html values to their corresponding values
-        const countryNmAPI = allCountries[0].name.common;
-        const flagAPI = allCountries[0].flags.png;
-        const populationAPI = allCountries[0].population;
-        const regionAPI = allCountries[0].region;
-        const subRegionApi = allCountries[0].subregion;
-        const capitalAPI = allCountries[0].capital[0];
-        const nativeName = allCountries[0].name.nativeName.eng.official;
-        const topLevelDomain = allCountries[0].tld[0];
-        const currencies = allCountries[0].currencies;
-        const languageAPI = allCountries[0].languages;
-        const borderCountriesApi = allCountries[0].borders;
+        const countryNmAPI = allCountries[i].name.common;
+        const flagAPI = allCountries[i].flags.png;
+        const populationAPI = allCountries[i].population;
+        const regionAPI = allCountries[i].region;
+        const subRegionApi = allCountries[i].subregion;
+        const capitalAPI = allCountries[i].capital[i];
+        const nativeName = allCountries[i].name.nativeName.eng.official;
+        const topLevelDomain = allCountries[i].tld[i];
+        const currencies = allCountries[i].currencies;
+        const languageAPI = allCountries[i].languages;
+        const borderCountriesApi = allCountries[i].borders;
         console.log(`
     name: ${countryNmAPI}
       flag: ${flagAPI},
@@ -260,7 +281,8 @@ async function getAllCountries() {
         // creating back btn
         let backBtnContainer = document.createElement("div");
         // styles for back btn container
-        backBtnContainer.style.backgroundColor = "hsl(209, 23%, 22%)";
+        backBtnContainer.style.backgroundColor =
+          "var( --Dark-Blue-Mode-Elements)";
         backBtnContainer.style.display = "flex";
         backBtnContainer.style.flexWrap = "wrap";
         backBtnContainer.style.width = "100px";
