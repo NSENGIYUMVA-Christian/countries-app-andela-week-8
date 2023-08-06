@@ -96,9 +96,9 @@ padding:8px;
     gap:20px;
     justify-content: center;
 }
-/* single-country-container */
+
 .single-country-styles{
-    /* border: 1px solid red; */
+  
     width:300px;
     background-color: var( --Dark-Blue-Mode-Elements); 
     margin-bottom: 30px ;
@@ -113,7 +113,7 @@ padding:8px;
 }
 /* search country block */
 .search-country-block{
-    border:2px solid yellow;
+    
     display:flex;
     flex-wrap: wrap;
     gap:20px;
