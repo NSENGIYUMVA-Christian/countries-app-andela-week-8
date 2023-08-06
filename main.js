@@ -2,9 +2,6 @@ let allCountriesContainer = document.querySelector(".all-countries-container");
 let searchedItem = document.querySelector(".searchedItem");
 let searchBtn = document.querySelector("#searchBtn");
 let searchByRegionSelect = document.querySelector("#regions");
-console.log("select", searchByRegionSelect);
-console.log("search item", searchedItem);
-console.log("search btn", searchBtn);
 
 // search by region
 searchByRegionSelect.addEventListener("input", function (e) {
@@ -12,6 +9,7 @@ searchByRegionSelect.addEventListener("input", function (e) {
   const selectedIndex = searchByRegionSelect.selectedIndex;
   const selectedItemName =
     searchByRegionSelect.options[selectedIndex].textContent;
+  console.log(selectedItemName);
   // invoking getCountriesByRegion
   getCountriesByRegion(selectedItemName);
   // console.log(selectedItemName);
@@ -22,7 +20,7 @@ searchBtn.addEventListener("click", function () {
   let searchedName = searchedItem.value;
   getCountryByName(searchedName);
 });
-
+//////////////////////////////////////////////get country by name/////////////////////////////////////////////////////
 async function getCountryByName(countryName) {
   try {
     let data = await fetch(
@@ -218,7 +216,7 @@ async function getCountryByName(countryName) {
   }
 }
 
-// get all countries
+///////////////////////////////////////////////////get all countries////////////////////////////////////////////////
 async function getAllCountries() {
   try {
     const data = await fetch(`https://restcountries.com/v3.1/all`, {
@@ -296,19 +294,83 @@ async function getAllCountries() {
   }
 }
 
-//////////////////////////////////// filtering by region////////////////////////////////////////
+//////////////////////////////////// filtering by region/////////////////////////////////////////////////////////
 async function getCountriesByRegion(regionName) {
   try {
     const data =
       await fetch(`https://restcountries.com/v3.1/region/${regionName}
     `);
-    let result = await data.json();
-    console.log("result", result);
+    let allCountries = await data.json();
+    console.log("allCountries", allCountries);
     console.log("by region succeeded");
     // delete all contents for all countries
-    // while (allCountriesContainer.firstChild) {
-    //   allCountriesContainer.removeChild(allCountriesContainer.firstChild);
-    // }
+    while (allCountriesContainer.firstChild) {
+      allCountriesContainer.removeChild(allCountriesContainer.firstChild);
+    }
+    //display return data
+    for (let i = 0; i < allCountries.length; i++) {
+      let singleCountryContainer = document.createElement("div");
+      let imgContainer = document.createElement("div");
+      let otherInfoContainer = document.createElement("div");
+
+      // flag image
+      let flagImg = document.createElement("img");
+      flagImg.src = allCountries[i].flags.png;
+      imgContainer.appendChild(flagImg);
+
+      // country name
+      let nameH2 = document.createElement("h2");
+      let nameText = document.createTextNode(allCountries[i].name.common);
+      nameH2.appendChild(nameText);
+      nameH2.style.marginBottom = "10px";
+      otherInfoContainer.appendChild(nameH2);
+
+      // population
+      let populationP = document.createElement("p");
+      let populationText = document.createTextNode(
+        `Population: ${Number(allCountries[i].population).toLocaleString()}`
+      );
+      populationP.appendChild(populationText);
+      populationP.style.marginBottom = "4px";
+      otherInfoContainer.appendChild(populationP);
+
+      //region
+      let regionP = document.createElement("p");
+      let regionText = document.createTextNode(
+        `Region: ${allCountries[i].region}`
+      );
+      regionP.appendChild(regionText);
+      regionP.style.marginBottom = "4px";
+      otherInfoContainer.appendChild(regionP);
+
+      //capital
+      let capitalP = document.createElement("p");
+      let capitalText;
+      if (allCountries[i]?.capital) {
+        capitalText = document.createTextNode(
+          `Capital: ${allCountries[i].capital[0]}`
+        );
+      } else {
+        capitalText = document.createTextNode("Capital: N/A");
+      }
+
+      capitalP.appendChild(capitalText);
+      otherInfoContainer.appendChild(capitalP);
+      //add styles to singleCountryContainer
+      singleCountryContainer.classList.add("single-country-styles");
+
+      //adding styles to imgContainer
+      imgContainer.classList.add("img-Container-Styles");
+      //adding styles to otherInfoContainer
+      otherInfoContainer.classList.add("other-InfoContainer-Styles");
+
+      // appending img container
+      singleCountryContainer.appendChild(imgContainer);
+      //appending other info container
+      singleCountryContainer.appendChild(otherInfoContainer);
+      //appending single country container
+      allCountriesContainer.appendChild(singleCountryContainer);
+    }
   } catch (error) {
     console.log("error occurred on fetching by region");
   }
