@@ -64,7 +64,16 @@ async function getCountryByName(countryName) {
     backBtnContainer.style.height = "25px";
     backBtnContainer.style.padding = "5px";
     backBtnContainer.style.marginBottom = "2px";
-
+    // adding event listener to backBtn
+    backBtnContainer.addEventListener("click", function () {
+      // delete all contents for a single country canva
+      while (allCountriesContainer.firstChild) {
+        allCountriesContainer.removeChild(allCountriesContainer.firstChild);
+      }
+      // re run get all countries
+      getAllCountries();
+      console.log("back btn clicked");
+    });
     let backIcon = document.createElement("i");
     backIcon.className = "fa-solid fa-arrow-left";
     backBtnContainer.appendChild(backIcon);
