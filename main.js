@@ -51,6 +51,31 @@ async function getCountryByName(countryName) {
     while (allCountriesContainer.firstChild) {
       allCountriesContainer.removeChild(allCountriesContainer.firstChild);
     }
+    // creating back btn
+    let backBtnContainer = document.createElement("div");
+    // styles for back btn container
+    backBtnContainer.style.backgroundColor = "hsl(209, 23%, 22%)";
+    backBtnContainer.style.display = "flex";
+    backBtnContainer.style.flexWrap = "wrap";
+    backBtnContainer.style.width = "100px";
+    backBtnContainer.style.boxShadow = "0 0 3px rgba(0, 0, 0, 0.5)";
+    backBtnContainer.style.borderRadius = "5px";
+    backBtnContainer.style.gap = "5px";
+    backBtnContainer.style.height = "25px";
+    backBtnContainer.style.padding = "5px";
+    backBtnContainer.style.marginBottom = "2px";
+
+    let backIcon = document.createElement("i");
+    backIcon.className = "fa-solid fa-arrow-left";
+    backBtnContainer.appendChild(backIcon);
+    //allCountriesContainer.appendChild(backIcon);
+    const backBtn = document.createElement("div");
+    let backBtnText = document.createTextNode("Back");
+    backBtn.appendChild(backBtnText);
+    // appending back button to search page
+    backBtnContainer.appendChild(backBtn);
+    allCountriesContainer.appendChild(backBtnContainer);
+
     // create a new blocks for single country
     let singleCountrySearchContainer = document.createElement("section");
     //flag container
@@ -140,6 +165,13 @@ async function getCountryByName(countryName) {
     moreInfoContainerPart2b.style.margin = "14px";
     //borderCountries
     let borderCountriesP = document.createElement("p");
+    // styles for border countries
+    borderCountriesP.style.Width = "100%";
+    borderCountriesP.style.border = "1px solid red";
+    // borderCountriesP.style.display = "flex";
+    // borderCountriesP.style.justifyContent = "center";
+    borderCountriesP.style.alignItems = "center";
+
     let borderCountriesText = document.createTextNode(
       `borderCountries: ${borderCountriesApi}`
     );
@@ -239,4 +271,6 @@ async function getAllCountries() {
     console.log(error);
   }
 }
+
+// get all countries on the first render
 getAllCountries();
