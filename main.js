@@ -226,6 +226,194 @@ async function getAllCountries() {
     // iterate through all countries and displaying it to he homepage
     for (let i = 0; i < allCountries.length; i++) {
       let singleCountryContainer = document.createElement("div");
+      // add on click event on each single country
+      singleCountryContainer.addEventListener("click", function (e) {
+        // delete all contents for all countries
+        while (allCountriesContainer.firstChild) {
+          allCountriesContainer.removeChild(allCountriesContainer.firstChild);
+        }
+        // display selected country
+        // assigning html values to their corresponding values
+        const countryNmAPI = allCountries[0].name.common;
+        const flagAPI = allCountries[0].flags.png;
+        const populationAPI = allCountries[0].population;
+        const regionAPI = allCountries[0].region;
+        const subRegionApi = allCountries[0].subregion;
+        const capitalAPI = allCountries[0].capital[0];
+        const nativeName = allCountries[0].name.nativeName.eng.official;
+        const topLevelDomain = allCountries[0].tld[0];
+        const currencies = allCountries[0].currencies;
+        const languageAPI = allCountries[0].languages;
+        const borderCountriesApi = allCountries[0].borders;
+        console.log(`
+    name: ${countryNmAPI}
+      flag: ${flagAPI},
+      population: ${populationAPI},
+      region: ${regionAPI},
+      subRegion: ${subRegionApi},
+      capital: ${capitalAPI},
+      native: ${nativeName},
+      topLevel: ${topLevelDomain},
+      currency: ${currencies},
+      language: ${languageAPI},
+      borders: ${borderCountriesApi}`);
+        // creating back btn
+        let backBtnContainer = document.createElement("div");
+        // styles for back btn container
+        backBtnContainer.style.backgroundColor = "hsl(209, 23%, 22%)";
+        backBtnContainer.style.display = "flex";
+        backBtnContainer.style.flexWrap = "wrap";
+        backBtnContainer.style.width = "100px";
+        backBtnContainer.style.boxShadow = "0 0 3px rgba(0, 0, 0, 0.5)";
+        backBtnContainer.style.borderRadius = "5px";
+        backBtnContainer.style.gap = "5px";
+        backBtnContainer.style.height = "25px";
+        backBtnContainer.style.padding = "5px";
+        backBtnContainer.style.marginBottom = "2px";
+        backBtnContainer.style.cursor = "pointer";
+        // adding event listener to backBtn
+        backBtnContainer.addEventListener("click", function () {
+          // delete all contents for a single country canva
+          while (allCountriesContainer.firstChild) {
+            allCountriesContainer.removeChild(allCountriesContainer.firstChild);
+          }
+          // re run get all countries
+          getAllCountries();
+          console.log("back btn clicked");
+        });
+        let backIcon = document.createElement("i");
+        backIcon.className = "fa-solid fa-arrow-left";
+        backBtnContainer.appendChild(backIcon);
+        //allCountriesContainer.appendChild(backIcon);
+        const backBtn = document.createElement("div");
+        let backBtnText = document.createTextNode("Back");
+        backBtn.appendChild(backBtnText);
+        // appending back button to search page
+        backBtnContainer.appendChild(backBtn);
+        allCountriesContainer.appendChild(backBtnContainer);
+
+        // create a new blocks for single country
+        let singleCountrySearchContainer = document.createElement("section");
+        //flag container
+        let flagContainer = document.createElement("div");
+        // flag image
+        let flagImg = document.createElement("img");
+        flagImg.src = flagAPI;
+        flagContainer.appendChild(flagImg);
+        singleCountrySearchContainer.appendChild(flagContainer);
+
+        // moreInfoContainer
+        let moreInfoContainer = document.createElement("div");
+
+        ////////////////////////////////////////////////////// moreInfoContainer part 1////////////////////////////////////////////
+        let moreInfoContainerPart1 = document.createElement("div");
+        // country name
+        let nameH2 = document.createElement("h2");
+        let nameText = document.createTextNode(countryNmAPI);
+        nameH2.appendChild(nameText);
+        nameH2.style.marginBottom = "10px";
+        moreInfoContainerPart1.appendChild(nameH2);
+        // native name
+        let naviteName = document.createElement("p");
+        let nativeText = document.createTextNode(`Native Name ${nativeName}`);
+        naviteName.appendChild(nativeText);
+        naviteName.style.marginBottom = "10px";
+        moreInfoContainerPart1.appendChild(naviteName);
+
+        // population
+        let populationP = document.createElement("p");
+        let populationText = document.createTextNode(
+          `Population: ${Number(populationAPI).toLocaleString()}`
+        );
+        populationP.appendChild(populationText);
+        populationP.style.marginBottom = "4px";
+        moreInfoContainerPart1.appendChild(populationP);
+
+        //region
+        let regionP = document.createElement("p");
+        let regionText = document.createTextNode(`Region: ${regionAPI}`);
+        regionP.appendChild(regionText);
+        regionP.style.marginBottom = "4px";
+        moreInfoContainerPart1.appendChild(regionP);
+        // sub-region
+        let subRegionP = document.createElement("p");
+        let subRegionText = document.createTextNode(
+          `Sub Region: ${subRegionApi}`
+        );
+        subRegionP.appendChild(subRegionText);
+        subRegionP.style.marginBottom = "4px";
+        moreInfoContainerPart1.appendChild(subRegionP);
+
+        //capital
+        let capitalP = document.createElement("p");
+        capitalP.style.marginBottom = "4px";
+        let capitalText = document.createTextNode(`Capital: ${capitalAPI}`);
+        capitalP.appendChild(capitalText);
+
+        moreInfoContainerPart1.appendChild(capitalP);
+        moreInfoContainer.appendChild(moreInfoContainerPart1);
+
+        ////////////////////////////////////////////////////// moreInfoContainer part 2////////////////////////////////////////////
+        let moreInfoContainerPart2 = document.createElement("div");
+        //topLevelDomain
+        let topLevelDomainP = document.createElement("p");
+        topLevelDomainP.style.marginBottom = "4px";
+        let topLevelDomainText = document.createTextNode(
+          `topLevelDomain: ${topLevelDomain}`
+        );
+        topLevelDomainP.appendChild(topLevelDomainText);
+        moreInfoContainerPart2.appendChild(topLevelDomainP);
+
+        //currencies
+        let currenciesP = document.createElement("p");
+        capitalP.style.marginBottom = "4px";
+        let currenciesText = document.createTextNode(
+          `currencies: ${currencies}`
+        );
+        currenciesP.appendChild(currenciesText);
+        moreInfoContainerPart2.appendChild(currenciesP);
+
+        //languages
+        let languagesP = document.createElement("p");
+        languagesP.style.marginBottom = "4px";
+        let languagesText = document.createTextNode(
+          `languages: ${languageAPI}`
+        );
+        languagesP.appendChild(languagesText);
+        moreInfoContainerPart2.appendChild(languagesP);
+        moreInfoContainer.appendChild(moreInfoContainerPart2);
+        ////////////////////////////////////////////////////// moreInfoContainer part 2 b ////////////////////////////////////////////
+        let moreInfoContainerPart2b = document.createElement("div");
+        moreInfoContainerPart2b.style.margin = "14px";
+        //borderCountries
+        let borderCountriesP = document.createElement("p");
+        // styles for border countries
+        borderCountriesP.style.Width = "100%";
+        borderCountriesP.style.border = "1px solid red";
+        // borderCountriesP.style.display = "flex";
+        // borderCountriesP.style.justifyContent = "center";
+        borderCountriesP.style.alignItems = "center";
+
+        let borderCountriesText = document.createTextNode(
+          `borderCountries: ${borderCountriesApi}`
+        );
+        borderCountriesP.appendChild(borderCountriesText);
+        moreInfoContainerPart2b.appendChild(borderCountriesP);
+        moreInfoContainer.appendChild(moreInfoContainerPart2b);
+        ///////////////////////////////////////////// end of information on passing info on single country page///////////////
+        //adding class name of moreInfoContainer
+        moreInfoContainer.classList.add("more-Info-Container");
+
+        // append moreInfoContainer to singleCountrySearchContainer
+        singleCountrySearchContainer.appendChild(moreInfoContainer);
+
+        //add styles to singleCountrySearchContainer
+        singleCountrySearchContainer.classList.add("search-country-block");
+        // appending singleCountrySearchContainer to  allCountriesContainer
+        allCountriesContainer.appendChild(singleCountrySearchContainer);
+        console.log(allCountries[i]);
+      });
+      /////////////////////////////end of on click event on more detail btn///////////////////////////////
       let imgContainer = document.createElement("div");
       let otherInfoContainer = document.createElement("div");
 
