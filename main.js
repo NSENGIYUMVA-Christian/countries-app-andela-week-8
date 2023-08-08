@@ -186,7 +186,13 @@ async function getCountryByName(countryName) {
     //languages
     let languagesP = document.createElement("p");
     languagesP.style.marginBottom = "4px";
-    let languagesText = document.createTextNode(`languages: ${languageAPI}`);
+    let languagesText = document.createTextNode(``);
+    // iterate through language object
+    languagesP.textContent = "languages :";
+    for (const [key, value] of Object.entries(languageAPI)) {
+      languagesP.textContent += ` ${value},`;
+    }
+
     languagesP.appendChild(languagesText);
     moreInfoContainerPart2.appendChild(languagesP);
     moreInfoContainer.appendChild(moreInfoContainerPart2);
@@ -369,18 +375,23 @@ async function getAllCountries() {
         //currencies
         let currenciesP = document.createElement("p");
         capitalP.style.marginBottom = "4px";
-        let currenciesText = document.createTextNode(
-          `currencies: ${currencies}`
-        );
+        let currenciesText;
+        // iterate through currency object
+        for (const [key, value] of Object.entries(currencies)) {
+          currenciesText = document.createTextNode(`currencies: ${key}`);
+        }
         currenciesP.appendChild(currenciesText);
         moreInfoContainerPart2.appendChild(currenciesP);
 
         //languages
         let languagesP = document.createElement("p");
         languagesP.style.marginBottom = "4px";
-        let languagesText = document.createTextNode(
-          `languages: ${languageAPI}`
-        );
+        let languagesText = document.createTextNode(``);
+        // iterate through language object
+        languagesP.textContent = "languages :";
+        for (const [key, value] of Object.entries(languageAPI)) {
+          languagesP.textContent += ` ${value},`;
+        }
         languagesP.appendChild(languagesText);
         moreInfoContainerPart2.appendChild(languagesP);
         moreInfoContainer.appendChild(moreInfoContainerPart2);
