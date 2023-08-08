@@ -174,7 +174,12 @@ async function getCountryByName(countryName) {
     //currencies
     let currenciesP = document.createElement("p");
     capitalP.style.marginBottom = "4px";
-    let currenciesText = document.createTextNode(`currencies: ${currencies}`);
+    let currenciesText;
+    // iterate through currency object
+    for (const [key, value] of Object.entries(currencies)) {
+      currenciesText = document.createTextNode(`currencies: ${key}`);
+    }
+
     currenciesP.appendChild(currenciesText);
     moreInfoContainerPart2.appendChild(currenciesP);
 
