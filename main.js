@@ -29,6 +29,9 @@ searchByRegionSelect.addEventListener("input", function (e) {
   const selectedIndex = searchByRegionSelect.selectedIndex;
   const selectedItemName =
     searchByRegionSelect.options[selectedIndex].textContent;
+  if (selectedItemName === "Filter by Region") {
+    return;
+  }
 
   // invoking getCountriesByRegion
   getCountriesByRegion(selectedItemName);
@@ -231,7 +234,9 @@ async function getCountryByName(countryName) {
       allCountriesContainer.removeChild(allCountriesContainer.firstChild);
     }
     const errorNode = document.createTextNode("invalid country name");
-    allCountriesContainer.appendChild(errorNode);
+    //allCountriesContainer.appendChild(errorNode);
+    alert("invalid country name");
+    getAllCountries();
   }
 }
 
