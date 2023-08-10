@@ -251,7 +251,7 @@ async function getAllCountries() {
         while (allCountriesContainer.firstChild) {
           allCountriesContainer.removeChild(allCountriesContainer.firstChild);
         }
-        console.log("single", allCountries[i].name.official);
+
         // display selected country
         // assigning html values to their corresponding values
         const countryNmAPI = allCountries[i].name.common;
@@ -272,6 +272,7 @@ async function getAllCountries() {
         backBtnContainer.style.backgroundColor =
           "var( --Dark-Blue-Mode-Elements)";
         backBtnContainer.style.display = "flex";
+        backBtnContainer.style.justifyContent = "center";
         backBtnContainer.style.flexWrap = "wrap";
         backBtnContainer.style.width = "100px";
         backBtnContainer.style.boxShadow = "0 0 3px rgba(0, 0, 0, 0.5)";
@@ -549,6 +550,7 @@ async function getCountriesByRegion(regionName) {
         backBtnContainer.style.padding = "5px";
         backBtnContainer.style.marginBottom = "2px";
         backBtnContainer.style.cursor = "pointer";
+
         // adding event listener to backBtn
         backBtnContainer.addEventListener("click", function () {
           // delete all contents for a single country canva
